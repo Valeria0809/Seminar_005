@@ -28,34 +28,49 @@
 // System.Console.WriteLine($"Сумма положительных чисел:  {sumPozitive}");
 // System.Console.WriteLine($"Сумма отрицвтельных чисел:  {sumNegative}");
 
+
 int[] FillArray(int size, int leftRange, int rightRange)
 {
-    int[] tempArray = new int [size];
+    int[] tempArray = new int[size];
     Random rand = new Random();
 
-    for(int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         tempArray[i] = rand.Next(leftRange, rightRange + 1);
     }
+
     return tempArray;
 }
 
-int[] array = FillArray(12, -9, 9);
-System.Console.WriteLine(string.Join(" ", array));
-
-int sumPozitive = 0;
-int sumNegative = 0;
-
-for(int i = 0; i < array.Length; i++)
+void PrintArray(int[] arr)
 {
-    if(array[i] > 0)
+    System.Console.WriteLine("[" + string.Join(", ", arr) + "]");
+}
+
+void SumNegativeAndPositive(int[] array, out int sumNegative, out int sumPositive)
+{
+    sumNegative = 0;
+    sumPositive = 0;
+
+    for (int i = 0; i < array.Length; i++)
     {
-        sumPozitive += array[i];
-    }
-    else
-    {
-        sumNegative += array[i];
+        if (array[i] > 0)
+        {
+            sumPositive += array[i];
+        }
+        else
+        {
+            sumNegative += array[i];
+        }
     }
 }
-System.Console.WriteLine($"Сумма положительных чисел:  {sumPozitive}");
-System.Console.WriteLine($"Сумма отрицвтельных чисел:  {sumNegative}");
+
+
+int[] array = FillArray(12, -9, 9);
+
+PrintArray(array);
+
+SumNegativeAndPositive(array, out int sumN, out int sumP);
+
+System.Console.WriteLine($"Сумма положительных: {sumP}");
+System.Console.WriteLine($"Сумма отрицательных: {sumN}");
